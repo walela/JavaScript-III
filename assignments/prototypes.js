@@ -76,8 +76,24 @@ Person.prototype.poop = function() {
   - A repaired car can be driven again.
 */
 function Car(model_name, make) {
-  
+  this.model_name = model_name;
+  this.make = make;
+  this.odometer = 0;
 }
+
+Car.prototype.drive(distance) {
+  this.odometer += distance;
+}
+
+Car.prototype.crash() {
+  delete this.prototype[drive];
+  return `I crashed `
+}
+
+Car.prototype.repair() {
+  this.prototype[drive] = function
+}
+
 /*
 
   TASK 3
