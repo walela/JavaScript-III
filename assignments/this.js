@@ -1,5 +1,5 @@
-/* The for principles of "this";
-* in your own words. explain the four principle for the "this" keyword below.
+/* The four principles of "this";
+* in your own words. explain the four principles for the "this" keyword below.
 *
 * 1. 
 * 2. 

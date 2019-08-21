@@ -45,6 +45,25 @@
   - When eating an edible, it should be pushed into a "stomach" property which is an array.
   - Give persons the ability to poop.
   - When pooping, the stomach should empty.
+*/
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+  this.stomach = [];
+}
+
+Person.prototype.greet = function() {
+  return `Hi, my name is ${this.name}. I am ${this.age} years old.`;
+};
+
+Person.prototype.eat = function(edible) {
+  this.stomach.push(edible);
+};
+
+Person.prototype.poop = function() {
+  this.stomach.length = 0; // clear array
+};
+/*
 
   TASK 2
 
@@ -55,6 +74,11 @@
   - A crashed car can't be driven any more. Attempts return a string "I crashed at x miles!", x being the miles in the odometer.
   - Give cars the ability to be repaired.
   - A repaired car can be driven again.
+*/
+function Car(model_name, make) {
+  
+}
+/*
 
   TASK 3
 
@@ -108,10 +132,10 @@
 */
 
 /*
-  * Inheritance chain: GameObject -> CharacterStats -> Humanoid
-  * Instances of Humanoid should have all of the same properties as CharacterStats and GameObject.
-  * Instances of CharacterStats should have all of the same properties as GameObject.
-*/
+ * Inheritance chain: GameObject -> CharacterStats -> Humanoid
+ * Instances of Humanoid should have all of the same properties as CharacterStats and GameObject.
+ * Instances of CharacterStats should have all of the same properties as GameObject.
+ */
 
 // Test you work by un-commenting these 3 objects and the list of console logs below:
 
