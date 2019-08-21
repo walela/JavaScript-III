@@ -58,6 +58,7 @@ Person.prototype.greet = function() {
 
 Person.prototype.eat = function(edible) {
   this.stomach.push(edible);
+  return `${this.name} has eaten a ${edible}`;
 };
 
 Person.prototype.poop = function() {
@@ -81,18 +82,22 @@ function Car(model_name, make) {
   this.odometer = 0;
 }
 
-Car.prototype.drive(distance) {
+Car.prototype.drive = function(distance) {
   this.odometer += distance;
-}
+};
 
-Car.prototype.crash() {
+Car.prototype.crash = function() {
   delete this.prototype[drive];
-  return `I crashed `
-}
+  this.prototype[drive] = function() {
+    return `I crashed at ${this.odometer} miles!`;
+  };
+};
 
-Car.prototype.repair() {
-  this.prototype[drive] = function
-}
+Car.prototype.repair = function() {
+  this.prototype[drive] = function(distance) {
+    this.odometer += distance;
+  };
+};
 
 /*
 
@@ -103,11 +108,25 @@ Car.prototype.repair() {
   - Babies should have the ability to play, which persons don't.
   - By playing, a string is returned with some text of your choosing.
 
+*/
+function Baby(name, age) {
+  Person.call(this, name, age);
+}
+Baby.prototype = Object.create(Person.prototype);
+Baby.prototype.play = function() {
+  return `Chooo chooo chooo!`;
+};
+var baby = new Baby("Zayden", 2);
+console.log(baby.greet(), baby.play());
+/*
+
   TASK 4
 
   Use your imagination and come up with constructors that allow to build objects
   With amazing and original capabilities. Build 3 small ones, or a very
   complicated one with lots of state. Surprise us!
+
+
 
 */
 
