@@ -11,6 +11,9 @@ This is seen for example in object declarations.
 * write out a code example of each explanation above
 */
 
+console.log(
+  `------------------------ beginning this.js -------------------------`
+);
 // Principle 1
 
 // code example for Window Binding
@@ -27,6 +30,8 @@ let player = {
     return `Hi, I'm ${this.name} and I am the ${this.title}`;
   }
 };
+
+console.log(player.introduceSelf());
 
 // Principle 3
 
@@ -52,3 +57,7 @@ let players = [
 
 players.forEach(player => logMessage.call(player));
 // code example for Explicit Binding
+
+console.log(
+  `------------------------------ end prototypes.js -----------------------------`
+);

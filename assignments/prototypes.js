@@ -149,21 +149,97 @@ console.log(baby.greet(), baby.play());
   complicated one with lots of state. Surprise us!
 */
 
-function Pet(name, type, age) {
+function Pet(name, type, gender) {
   this.name = name;
   this.type = type;
-  this.age  = age;
+  this.gender = gender;
+  this.age = 0;
 }
 
-function Phone(make, model) {
+Pet.prototype.growOlder = function() {
+  this.age += 1;
+  return `${this.name} just grew 1 ${this.type} year older!`;
+};
+
+Pet.prototype.play = function() {
+  return `${this.name} is playing. Fun!`;
+};
+
+let zigo = new Pet("Zigo", "dog", "Male");
+console.log(zigo);
+console.log(zigo.growOlder());
+console.log(zigo.growOlder());
+console.log(`${zigo.name} is now ${zigo.age} years old!`);
+console.log(zigo.play());
+
+function Phone(make, model, owner) {
   this.make = make;
   this.model = model;
+  this.owner = owner;
+  this.contacts = [];
 }
 
-function Student(name, cohort) {
+Phone.prototype.ring = function() {
+  return `Ring ring!`;
+};
+
+Phone.prototype.addContact = function(contact) {
+  console.log(`Adding contacts to phone`);
+  this.contacts.push(contact);
+  return `${this.owner}'s ${this.make} ${this.model} has ${
+    this.contacts.length
+  } contacts!`;
+};
+
+let moto = new Phone("Samsung", "S8", "Austin");
+console.log(moto);
+console.log(
+  `${moto.owner}'s ${moto.make} ${moto.model} has ${
+    moto.contacts.length
+  } contacts!`
+);
+moto.addContact({ name: "Mum", number: 254727709928 });
+console.log(
+  `${moto.owner}'s ${moto.make} ${moto.model} has ${
+    moto.contacts.length
+  } contacts!`
+);
+console.log(moto.contacts);
+console.log(moto.ring());
+
+function Student(name, cohort, favoriteLanguage) {
   this.name = name;
   this.cohort = cohort;
+  this.favoriteLanguage = favoriteLanguage;
+  this.knowledge = 0;
+  this.scores = [];
 }
+
+Student.prototype.introduceSelf = function() {
+  return `Hi, my name is ${this.name} and I am in cohort ${
+    this.cohort
+  }. My favorite language is ${this.favoriteLanguage}`;
+};
+
+Student.prototype.study = function(effort) {
+  this.knowledge += effort;
+  return `${
+    this.name
+  } just increased his knowledge by ${effort} knowledge units`;
+};
+
+Student.prototype.takeExam = function() {
+  let score = Math.random() * (100 - this.knowledge) + this.knowledge; // random score between knowledge and maxscore
+  this.scores.push(score);
+};
+
+let walela = new Student("Austin Walela", "WEBEU3", "JavaScript");
+console.log(walela);
+console.log(walela.introduceSelf());
+console.log(walela.study(35));
+walela.takeExam();
+walela.takeExam();
+console.log(`${walela.name} has the following test scores: `, walela.scores);
 
 /*
 
