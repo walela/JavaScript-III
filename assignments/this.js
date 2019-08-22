@@ -1,7 +1,8 @@
 /* The four principles of "this";
 * in your own words. explain the four principles for the "this" keyword below.
 *
-* 1. Window binding -- This is the default binding. this will refer to the window object.
+* 1. Window binding -- This is the default binding, when variables are declared in the global scope.
+ `this` will refer to the window object.
 * 2. Implicit binding -- In this binding, this refers to the parent object containing the `this` keyword.
 This is seen for example in object declarations.
 * 3. Explicit binding - this is when the value of 'this' is explicitly set via `call`, `bind`  or `apply` functions.

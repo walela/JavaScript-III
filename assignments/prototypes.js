@@ -46,6 +46,9 @@
   - Give persons the ability to poop.
   - When pooping, the stomach should empty.
 */
+console.log(
+  `------------------------ beginning prototypes.js -------------------------`
+);
 function Person(name, age) {
   this.name = name;
   this.age = age;
@@ -64,6 +67,15 @@ Person.prototype.eat = function(edible) {
 Person.prototype.poop = function() {
   this.stomach.length = 0; // clear array
 };
+
+const ima = new Person("Imali", 25);
+console.log(ima);
+console.log(ima.greet());
+ima.eat("sandwich");
+ima.eat("soda");
+console.log(`stomach contents after eating: `, ima.stomach);
+ima.poop();
+console.log(`stomach contents after pooping: `, ima.stomach);
 /*
 
   TASK 2
@@ -80,25 +92,34 @@ function Car(model_name, make) {
   this.model_name = model_name;
   this.make = make;
   this.odometer = 0;
+  this.canBeDriven = true;
 }
 
 Car.prototype.drive = function(distance) {
-  this.odometer += distance;
+  if (this.canBeDriven === true) {
+    this.odometer += distance;
+  }
 };
 
 Car.prototype.crash = function() {
-  delete this.prototype[drive];
-  this.prototype[drive] = function() {
-    return `I crashed at ${this.odometer} miles!`;
-  };
+  this.canBeDriven = false;
+  return `I crashed at ${this.odometer} miles!`;
 };
 
 Car.prototype.repair = function() {
-  this.prototype[drive] = function(distance) {
-    this.odometer += distance;
-  };
+  this.canBeDriven = true;
 };
 
+let myCar = new Car("Corvette", "c8");
+myCar.drive(100);
+console.log(`Car after driving for a while: `, myCar);
+console.log(`This is my new car: `, myCar);
+console.log(myCar.crash());
+myCar.drive(25);
+console.log(`Attempting to drive my car after the crash: `, myCar); // oh no
+myCar.repair();
+myCar.drive(25);
+console.log(`Is my car working after repair?`, myCar);
 /*
 
   TASK 3
@@ -117,6 +138,7 @@ Baby.prototype.play = function() {
   return `Chooo chooo chooo!`;
 };
 var baby = new Baby("Zayden", 2);
+console.log(`new baby: `, baby);
 console.log(baby.greet(), baby.play());
 /*
 
@@ -125,10 +147,23 @@ console.log(baby.greet(), baby.play());
   Use your imagination and come up with constructors that allow to build objects
   With amazing and original capabilities. Build 3 small ones, or a very
   complicated one with lots of state. Surprise us!
-
-
-
 */
+
+function Pet(name, type, age) {
+  this.name = name;
+  this.type = type;
+  this.age  = age;
+}
+
+function Phone(make, model) {
+  this.make = make;
+  this.model = model;
+}
+
+function Student(name, cohort) {
+  this.name = name;
+  this.cohort = cohort;
+}
 
 /*
 
@@ -233,3 +268,7 @@ console.log(baby.greet(), baby.play());
   console.log(mage.takeDamage()); // Bruce took damage.
   console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
 */
+
+console.log(
+  `------------------------------ end prototypes.js -----------------------------`
+);
