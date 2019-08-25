@@ -45,6 +45,38 @@
   - When eating an edible, it should be pushed into a "stomach" property which is an array.
   - Give persons the ability to poop.
   - When pooping, the stomach should empty.
+*/
+console.log(
+  `------------------------ beginning prototypes.js -------------------------`
+);
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+  this.stomach = [];
+}
+
+Person.prototype.greet = function() {
+  return `Hi, my name is ${this.name}. I am ${this.age} years old.`;
+};
+
+Person.prototype.eat = function(edible) {
+  this.stomach.push(edible);
+  return `${this.name} has eaten a ${edible}`;
+};
+
+Person.prototype.poop = function() {
+  this.stomach.length = 0; // clear array
+};
+
+const ima = new Person("Imali", 25);
+console.log(ima);
+console.log(ima.greet());
+ima.eat("sandwich");
+ima.eat("soda");
+console.log(`stomach contents after eating: `, ima.stomach);
+ima.poop();
+console.log(`stomach contents after pooping: `, ima.stomach);
+/*
 
   TASK 2
 
@@ -55,6 +87,40 @@
   - A crashed car can't be driven any more. Attempts return a string "I crashed at x miles!", x being the miles in the odometer.
   - Give cars the ability to be repaired.
   - A repaired car can be driven again.
+*/
+function Car(model_name, make) {
+  this.model_name = model_name;
+  this.make = make;
+  this.odometer = 0;
+  this.canBeDriven = true;
+}
+
+Car.prototype.drive = function(distance) {
+  if (this.canBeDriven === true) {
+    this.odometer += distance;
+  }
+};
+
+Car.prototype.crash = function() {
+  this.canBeDriven = false;
+  return `I crashed at ${this.odometer} miles!`;
+};
+
+Car.prototype.repair = function() {
+  this.canBeDriven = true;
+};
+
+let myCar = new Car("Corvette", "c8");
+myCar.drive(100);
+console.log(`Car after driving for a while: `, myCar);
+console.log(`This is my new car: `, myCar);
+console.log(myCar.crash());
+myCar.drive(25);
+console.log(`Attempting to drive my car after the crash: `, myCar); // oh no
+myCar.repair();
+myCar.drive(25);
+console.log(`Is my car working after repair?`, myCar);
+/*
 
   TASK 3
 
@@ -63,13 +129,117 @@
   - Babies should have the ability to play, which persons don't.
   - By playing, a string is returned with some text of your choosing.
 
+*/
+function Baby(name, age) {
+  Person.call(this, name, age);
+}
+Baby.prototype = Object.create(Person.prototype);
+Baby.prototype.play = function() {
+  return `Chooo chooo chooo!`;
+};
+var baby = new Baby("Zayden", 2);
+console.log(`new baby: `, baby);
+console.log(baby.greet(), baby.play());
+/*
+
   TASK 4
 
   Use your imagination and come up with constructors that allow to build objects
   With amazing and original capabilities. Build 3 small ones, or a very
   complicated one with lots of state. Surprise us!
-
 */
+
+function Pet(name, type, gender) {
+  this.name = name;
+  this.type = type;
+  this.gender = gender;
+  this.age = 0;
+}
+
+Pet.prototype.growOlder = function() {
+  this.age += 1;
+  return `${this.name} just grew 1 ${this.type} year older!`;
+};
+
+Pet.prototype.play = function() {
+  return `${this.name} is playing. Fun!`;
+};
+
+let zigo = new Pet("Zigo", "dog", "Male");
+console.log(zigo);
+console.log(zigo.growOlder());
+console.log(zigo.growOlder());
+console.log(`${zigo.name} is now ${zigo.age} years old!`);
+console.log(zigo.play());
+
+function Phone(make, model, owner) {
+  this.make = make;
+  this.model = model;
+  this.owner = owner;
+  this.contacts = [];
+}
+
+Phone.prototype.ring = function() {
+  return `Ring ring!`;
+};
+
+Phone.prototype.addContact = function(contact) {
+  console.log(`Adding contacts to phone`);
+  this.contacts.push(contact);
+  return `${this.owner}'s ${this.make} ${this.model} has ${
+    this.contacts.length
+  } contacts!`;
+};
+
+let moto = new Phone("Samsung", "S8", "Austin");
+console.log(moto);
+console.log(
+  `${moto.owner}'s ${moto.make} ${moto.model} has ${
+    moto.contacts.length
+  } contacts!`
+);
+moto.addContact({ name: "Mum", number: 254727709928 });
+console.log(
+  `${moto.owner}'s ${moto.make} ${moto.model} has ${
+    moto.contacts.length
+  } contacts!`
+);
+console.log(moto.contacts);
+console.log(moto.ring());
+
+function Student(name, cohort, favoriteLanguage) {
+  this.name = name;
+  this.cohort = cohort;
+  this.favoriteLanguage = favoriteLanguage;
+  this.knowledge = 0;
+  this.scores = [];
+}
+
+Student.prototype.introduceSelf = function() {
+  return `Hi, my name is ${this.name} and I am in cohort ${
+    this.cohort
+  }. My favorite language is ${this.favoriteLanguage}`;
+};
+
+Student.prototype.study = function(effort) {
+  this.knowledge += effort;
+  return `${
+    this.name
+  } just increased his knowledge by ${effort} knowledge units`;
+};
+
+Student.prototype.takeExam = function() {
+  let score = Math.random() * (100 - this.knowledge) + this.knowledge; // random score between knowledge and maxscore
+  this.scores.push(score);
+};
+
+let walela = new Student("Austin Walela", "WEBEU3", "JavaScript");
+console.log(walela);
+console.log(walela.introduceSelf());
+console.log(walela.study(35));
+walela.takeExam();
+walela.takeExam();
+console.log(`${walela.name} has the following test scores: `, walela.scores);
 
 /*
 
@@ -108,10 +278,10 @@
 */
 
 /*
-  * Inheritance chain: GameObject -> CharacterStats -> Humanoid
-  * Instances of Humanoid should have all of the same properties as CharacterStats and GameObject.
-  * Instances of CharacterStats should have all of the same properties as GameObject.
-*/
+ * Inheritance chain: GameObject -> CharacterStats -> Humanoid
+ * Instances of Humanoid should have all of the same properties as CharacterStats and GameObject.
+ * Instances of CharacterStats should have all of the same properties as GameObject.
+ */
 
 // Test you work by un-commenting these 3 objects and the list of console logs below:
 
@@ -174,3 +344,7 @@
   console.log(mage.takeDamage()); // Bruce took damage.
   console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
 */
+
+console.log(
+  `------------------------------ end prototypes.js -----------------------------`
+);
