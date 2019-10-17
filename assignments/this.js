@@ -39,7 +39,7 @@ let players = [
   { name: "Yao Ming" }
 ];
 
-players.forEach(player => logMessage.call(player));
+players.forEach(player => logMessage.call(player)); // loops through the array and logs message
 
 // Principle 4
 // code example for New Binding
@@ -49,4 +49,4 @@ function Language(name, type) {
 }
 
 let js = new Language("JavaScript", "Functional");
-console.log(js.name, js.type);
+console.log(js.name, js.type); // JavaScript Functional
