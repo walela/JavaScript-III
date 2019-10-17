@@ -40,7 +40,7 @@ function CharacterStats(createdAt, name, dimensions, healthPoints) {
 
 CharacterStats.prototype = Object.create(GameObject.prototype);
 CharacterStats.prototype.takeDamage = function() {
-  return `${this.name} took damage`;
+  return `${this.name} took damage.`;
 };
 
 /*
@@ -67,7 +67,7 @@ function Humanoid(attrs) {
 
 Humanoid.prototype = Object.create(CharacterStats.prototype);
 Humanoid.prototype.greet = function() {
-  return `${this.name} offers a greeting in ${this.language}`;
+  return `${this.name} offers a greeting in ${this.language}.`;
 };
 /*
  * Inheritance chain: GameObject -> CharacterStats -> Humanoid
@@ -124,7 +124,7 @@ console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }
 console.log(swordsman.healthPoints); // 15
 console.log(mage.name); // Bruce
 console.log(swordsman.team); // The Round Table
-console.log(mage.weapons); // Staff of Shamalama
+console.log(mage.weapons); // [Staff of Shamalama]
 console.log(archer.language); // Elvish
 console.log(archer.greet()); // Lilith offers a greeting in Elvish.
 console.log(mage.takeDamage()); // Bruce took damage.
